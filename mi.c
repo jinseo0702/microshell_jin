@@ -24,7 +24,9 @@ int check_op(char *op)
 int cnt_op(char **argv)
 {
 	int cnt = 0;
-	int idx = 0;
+	int idx = 1;
+	while (check_op(argv[idx]))
+		idx++;
 	while (argv[idx])
 	{
 		while (check_op(argv[idx]))
@@ -50,7 +52,9 @@ int cnt_op(char **argv)
 int op_addr(char **argv, int st)
 {
 	int cnt = 0;
-	int idx = 0;
+	int idx = 1;
+	while (check_op(argv[idx]))
+		idx++;
 	while (argv[idx])
 	{
 		while (check_op(argv[idx]))
@@ -93,7 +97,7 @@ void start_fork(char **argv, int cnt, int st)
 	while (!check_op(argv[idx]))
 		idx++;
 	op_flag = check_op(argv[idx]);
-	printf("%d Hello\n", op_flag);//check
+	printf("%d cnt %d st %d Hello\n", op_flag, cnt, st);//check
 	
 }
 
@@ -101,6 +105,6 @@ int main(int argc, char *argv[], char *envp[])
 {
 	te = envp;
 	int cnt = cnt_op(argv);
-	start(&argv[1], cnt);
+	start(argv, cnt);
 	return (0);
 }
